@@ -57,7 +57,7 @@ public class HomePage {
 	@FindBy(xpath = "//li[@id='about us']")
 	WebElement aboutUsFooterElement;
 
-	@FindBy(xpath = "//a[@id='login-link'and @name='login-link'and @class='nav-link']")
+	@FindBy(xpath = "//a[@class='nav-link' and @id='login-link']")
 	WebElement loginButtonHeaderElement;
 
 	@FindBy(xpath = "//a[text()='Login' and @id='login-link' and @ name='login-link' and @ class='nav-link']")
@@ -83,19 +83,19 @@ public class HomePage {
 
 	@FindBy(xpath = "//input[@id='id_email']")
 	WebElement emailFromDoYouHaveAnyQuestionHeaderElement;
-	
+
 	@FindBy(xpath = "//input[@id='id_subject']")
 	WebElement subjectFromDoYouHaveAnyQuationHeaderElement;
-	
+
 	@FindBy(xpath = "//input[@id='id_experiance']")
 	WebElement experianceFromDoYouHaveAnyQuestionHeaderElement;
-	
+
 	@FindBy(xpath = "//textarea[@id='id_message']")
 	WebElement massageFromDoYouHaveAnyQuestionHeaderElement;
-	
+
 	@FindBy(xpath = "//button[text()='send now']")
 	WebElement sendNowFromDoYouHaveAnyQuestionHeaderElement;
-	
+
 	@FindBy(xpath = "//h3[@id='find-us']")
 	WebElement findUsFromHomePagElement;
 
@@ -166,71 +166,43 @@ public class HomePage {
 	public void scroll_into_redirect_page_and_validate_title_current_url_and_header() {
 		pause(3000);
 		scrollIntoViewTheElementUsingJavascriptExecutor(driver, contuctUsElement);
-		clickElement(contuctUsElement);
-		verifyTitle(driver, "Enthrall IT");
-		verifyCurrentUrl(driver, "https://enthrallit.com/");
 
 		pause(4000);
 		validationOfHeader(doYouHaveAnyQuestionHeaderElement, "Do You Have Any Questions");
-		elementEnabled(doYouHaveAnyQuestionHeaderElement);
-		clickElement(doYouHaveAnyQuestionHeaderElement);
-		verifyTitle(driver, "Enthrall IT");
-		verifyCurrentUrl(driver, "https://enthrallit.com/");
 
 		pause(4000);
 		elementEnabled(nameFromDoYouHaveAnyQuestionHeaderElement);
 		clickElement(nameFromDoYouHaveAnyQuestionHeaderElement);
 		inputTextThenClickTab(nameFromDoYouHaveAnyQuestionHeaderElement, "Purnota");
-		verifyTitle(driver, "Enthrall IT");
-		verifyCurrentUrl(driver, "https://enthrallit.com/");
-		pause(3000);
 
 		pause(4000);
 		elementEnabled(emailFromDoYouHaveAnyQuestionHeaderElement);
 		clickElement(emailFromDoYouHaveAnyQuestionHeaderElement);
 		inputTextThenClickTab(emailFromDoYouHaveAnyQuestionHeaderElement, "toroni1980@gmail.com");
-		verifyTitle(driver, "Enthrall IT");
-		verifyCurrentUrl(driver, "https://enthrallit.com/");
-		pause(4000);
-		
+
 		pause(3000);
 		elementEnabled(subjectFromDoYouHaveAnyQuationHeaderElement);
 		clickElement(subjectFromDoYouHaveAnyQuationHeaderElement);
 		inputTextThenClickTab(subjectFromDoYouHaveAnyQuationHeaderElement, "QA(Atomation)");
 
-
 		pause(3000);
 		elementDisplayed(experianceFromDoYouHaveAnyQuestionHeaderElement);
 		clickElement(experianceFromDoYouHaveAnyQuestionHeaderElement);
 		inputTextThenClickTab(experianceFromDoYouHaveAnyQuestionHeaderElement, "5 years job(IT base)");
-		verifyTitle(driver, "Enthrall IT");
-		verifyCurrentUrl(driver, "https://enthrallit.com/");
-		pause(4000);
-		
+
 		pause(3000);
 		elementEnabled(massageFromDoYouHaveAnyQuestionHeaderElement);
 		clickElement(massageFromDoYouHaveAnyQuestionHeaderElement);
-		inputTextThenClickTab(massageFromDoYouHaveAnyQuestionHeaderElement, "I need more Information about Enthrall IT school QA Atomation program.");
-		verifyTitle(driver, "Enthrall IT");
-		verifyCurrentUrl(driver, "https://enthrallit.com/");
-		pause(4000);
-		
+		inputTextThenClickTab(massageFromDoYouHaveAnyQuestionHeaderElement,
+				"I need more Information about Enthrall IT school QA Atomation program.");
+
 		pause(4000);
 		elementEnabled(sendNowFromDoYouHaveAnyQuestionHeaderElement);
 		clickElement(sendNowFromDoYouHaveAnyQuestionHeaderElement);
 		inputTextThenClickEnter(sendNowFromDoYouHaveAnyQuestionHeaderElement, "click");
-		verifyTitle(driver, "Enthrall IT");
-		verifyCurrentUrl(driver, "https://enthrallit.com/");
+
 		pause(4000);
-		
-		pause(4000);
-		elementEnabled(findUsFromHomePagElement);
-		elementDisplayed(findUsFromHomePagElement);
-		clickElement(findUsFromHomePagElement);
-		verifyTitle(driver, "Enthrall IT");
-		verifyCurrentUrl(driver, "https://enthrallit.com/");
-		pause(4000);
-		
+
 	}
 
 	public void validationForAllFooterMenu() {

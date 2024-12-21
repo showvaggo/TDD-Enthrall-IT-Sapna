@@ -23,7 +23,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 
+import pages.Dashboard;
 import pages.HomePage;
+import pages.LoginPage;
 import reports.ExtentReportManager;
 import reports.TestManager;
 import utils.Configuration;
@@ -32,6 +34,8 @@ import static utils.IConstant.*;
 public class BaseClass {
 	public WebDriver driver;
 	public HomePage homePage;
+	public LoginPage loginPage;
+	public Dashboard dashboard;
 	Configuration configuration;
 	// public ForgotUserId forgotUserId;
 	ExtentReports extentReports;
@@ -100,6 +104,8 @@ public class BaseClass {
 
 	public void initClass() {
 		homePage = new HomePage(driver);
+		loginPage=new LoginPage(driver);
+		dashboard=new Dashboard(driver);
 	}
 
 	@AfterMethod
