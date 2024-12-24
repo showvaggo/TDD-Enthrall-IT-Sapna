@@ -25,22 +25,19 @@ public class LoginPage {
 
 	@FindBy(xpath = "//a[@id='logo-id']")
 	WebElement logo;
-	
+
 	@FindBy(xpath = "//a[@class='nav-link' and @id='login-link']")
 	WebElement loginHeaderElement;
-	
-	//@FindBy(xpath = "//a[@id='login-link'and @name='login-link'and @class='nav-link']")
-	//WebElement loginButton;
 
 	@FindBy(xpath = "//h2[text()='Login into your account']")
 	WebElement loginPageText;
 
 	@FindBy(xpath = "//input[@id='emails']")
 	WebElement useremail;
-	
+
 	@FindBy(xpath = "//input[@id='password']")
 	WebElement userpassword;
-	
+
 	@FindBy(xpath = "//button[@id='login' and @name='login']")
 	WebElement userlogin;
 
@@ -70,33 +67,23 @@ public class LoginPage {
 	}
 
 	public void login_page_url_validation() {
-        pause(3000);
+		pause(3000);
 		clickElement(logo);
 		verifyCurrentUrl(driver, "https://enthrallit.com/");
 		verifyTitle(driver, "Enthrall IT");
 		pause(4000);
 		clickElement(loginHeaderElement);
 		pause(3000);
-		//verifyTextOfTheWebElement(loginPageText, "Login into your account");
+		// verifyTextOfTheWebElement(loginPageText, "Login into your account");
 	}
 
 	public void login_page_text_validation() {
 		pause(4000);
 		verifyTextOfTheWebElement(loginPageText, "Login into your account");
 
-		
 	}
 
 	public void login_steps_validation() {
-		//elementDisplayed(logo);
-		//clickElement(logo);
-		//verifyTitle(driver, "Enthrall IT");
-		//pause(4000);
-		//clickElement(loginButton);
-		//pause(3000);
-		//verifyCurrentUrl(driver, "https://enthrallit.com/accounts/login/");
-		//pause(3000);
-		//verifyTextOfTheWebElement(loginPageText, "Login into your account");
 		login_page_url_validation();
 		pause(3000);
 		elementEnabled(useremail);
@@ -109,8 +96,6 @@ public class LoginPage {
 		clickElement(userlogin);
 		pause(3000);
 		verifyTitle(driver, "Enthrall IT - Dashboard");
-		
-		
+
 	}
 }
-
