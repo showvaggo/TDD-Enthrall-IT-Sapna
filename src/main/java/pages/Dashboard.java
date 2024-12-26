@@ -1,6 +1,7 @@
 package pages;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.apache.commons.exec.LogOutputStream;
 import org.openqa.selenium.WebDriver;
@@ -28,11 +29,13 @@ public class Dashboard {
 	 */
 	WebDriver driver;
 	WebDriverWait wait;
+	LoginPage loginPage;
 
 	public Dashboard(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		loginPage = new LoginPage(driver);
 	}
 
 	@FindBy(xpath = "//a[text()='Return site']")
@@ -128,7 +131,7 @@ public class Dashboard {
 	@FindBy(xpath = "//a[@id='logo-id']")
 	WebElement logo;
 
-	@FindBy(xpath = "(//a[text()='Login'])[1]")
+	@FindBy(xpath = "//a[@id='login-link' and @name='login-link' and @class='nav-link']")
 	WebElement loginHeaderElement;
 
 	@FindBy(xpath = "//h2[text()='Login into your account']")
@@ -151,7 +154,7 @@ public class Dashboard {
 	WebElement automationSubHeader;
 	@FindBy(xpath = "//button[text()='Enroll Now']")
 	WebElement enrollNow;
-	@FindBy(xpath = "//div[@class='breadcrumb-holder']")
+	@FindBy(xpath = "(//div[@class='row'])[1]")
 	WebElement homeEnrollButton;
 	@FindBy(xpath = "//h3[text()='Select your course from the dropdown']")
 	WebElement enrollNowHeader;
@@ -169,14 +172,52 @@ public class Dashboard {
 	@FindBy(xpath = "//h3[text()='Select your course from the dropdown']")
 	WebElement selectYourCourseFromTheDropdown;
 
-	@FindBy(xpath = "//input[@name='f_name']")
+	@FindBy(xpath = "//input[@id='id_f_name']")
 	WebElement first_Name;
+	@FindBy(xpath = "//small[@id='f_name_error']")
+	WebElement first_name_alphabetic_error;
+	@FindBy(xpath = "//small[text()='First Name is a required field.']")
+	WebElement First_name_is_a_required_field;
 
-	@FindBy(xpath = "//input[@name='m_name']")
+	@FindBy(xpath = "//input[@id='id_m_name']")
 	WebElement middle_Name;
+	@FindBy(xpath = "//small[@id='m_name_error']")
+	WebElement middle_name_alphabetic_error;
 
 	@FindBy(xpath = "//input[@id='id_l_name']")
 	WebElement last_Name;
+	@FindBy(xpath = "//small[@id='l_name_error']")
+	WebElement last_name_alphabetic_error;
+	@FindBy(xpath = "//small[text()='Last Name is a required field.']")
+	WebElement last_name_is_a_requird_field;
+
+	// @FindBy(xpath = "//small[@id='i_am_error']")
+	// WebElement i_am_dropdown_btn;
+
+	// @FindBy(xpath = "//small[@id='i_am_error']")
+	// WebElement I_m_is_a_required_field;
+	@FindBy(xpath = "//select[@id='id_i_am']")
+	WebElement iAmFromDropdown;
+	@FindBy(xpath = "//small[@id='i_am_error']")
+	WebElement iAmIsARequierdField;
+
+	@FindBy(xpath = "//select[@id='id_course_wish_to_enroll']")
+	WebElement courseWishToEnrollFromDropdown;
+	@FindBy(xpath = "//small[@id='course_wish_error']")
+	WebElement courseWishToEnrollIsArequaredField;
+	
+	@FindBy(xpath = "//input[@id='id_phone']")
+	WebElement phoneNumber;
+	@FindBy(xpath = "//small[text()='Phone Number is a required field.']")
+	WebElement phoneNumberIsARequerdField;
+	@FindBy(xpath = "//small[text()='Must be a valid Phone Number.']")
+	WebElement mustBeAValidPhoneNumber;
+	@FindBy(xpath = "//small[@id='phone_error']")
+	WebElement phNMustBeExactly10Digit;
+	@FindBy(xpath = "//small[@id='phone_error']")
+	WebElement phNMustNotStartWithA1Or0;
+	@FindBy(xpath = "//small[@id='phone_error']")
+	WebElement phnNotAllowUperOrLowerCaseLetter;
 
 	public void login_easy_step() {
 		pause(2000);
@@ -350,27 +391,156 @@ public class Dashboard {
 		pause(3000);
 		clickElement(automationSubHeader);
 		pause(3000);
-
-	}
-	public void EnrollNowHomePageStepValidation() {
-		pause(2000);
-		Automation_page_validation_step();
 		clickElement(homeEnrollButton);
 		pause(1000);
-		verifyCurrentUrl(driver, "https://enthrallit.com/course/dashboard/enrolls/");
+		// verifyCurrentUrl(driver, "https://enthrallit.com/course/dashboard/enrolls/");
+		// pause(1000);
+	}
+
+	public void EnrollNowHomePageStepValidation() {
+
+		pause(2000);
+		Automation_page_validation_step();
+		pause(3000);
+		switchToChildWindow(driver, automation, enrollNow);
+		clickElement(homeEnrollButton);
 		pause(1000);
-		verifyTitle(driver, "Enthrall IT - Dashboard");
+		// verifyCurrentUrl(driver, "https://enthrallit.com/course/dashboard/enrolls/");
+		// pause(1000);
+		// verifyTitle(driver, "Enthrall IT - Dashboard");
 		pause(3000);
 		validationOfHeader(enrollNowHeader, "Select your course from the dropdown");
 		pause(1000);
 		validationOfSubHeader(enrollNowSubHeader, "Please enter your personal and contact information.");
 		pause(3000);
-	validationOfOtherHeader(enrollNowOtherHeader, "All fields are required unless marked (optional).");
+		validationOfOtherHeader(enrollNowOtherHeader, "All fields are required unless marked (optional).");
+		// pause(3000);
+		// clickElement(first_Name);
+		// pause(1000);
+		// inputText(first_Name, "Purnota");
+		pause(2000);
+	}
+
+	public void firstNameValidation() {
+		pause(3000);
+		// EnrollNowHomePageStepValidation();
+		driver.navigate().to("https://enthrallit.com/course/dashboard/enrolls/");
 		pause(3000);
 		clickElement(first_Name);
-		pause(1000);
-		inputText(first_Name, "Purnota");
+		verifyLengthOfTheFieldContent(first_Name, Attribute.MAX_LENGTH, "20");
+		pause(3000);
+		inputTextThenClickTab(first_Name, "@##$%");
+		pause(3000);
+		verifyErrorMessageUnderTheField(first_name_alphabetic_error, Attribute.INNER_HTML,
+				"Must be alphabetic characters.");
 		pause(2000);
+		inputTextThenClickTab(first_Name, "7654321");
+		verifyErrorMessageUnderTheField(first_name_alphabetic_error, Attribute.INNER_HTML,
+				"Must be alphabetic characters.");
+		clearTextFromTheField(first_Name);
+		clickElement(first_Name);
+		verifyErrorMessageUnderTheField(First_name_is_a_required_field, Attribute.INNER_HTML,
+				"First Name is a required field.");
+
+		inputTextThenClickTab(first_Name, "'Purnota- Sarker'");
+		pause(2000);
+	}
+
+	public void MiddleNameValidation() {
+		// pause(3000);
+		// EnrollNowHomePageStepValidation();
+		pause(3000);
+		firstNameValidation();
+		clickElement(middle_Name);
+		verifyLengthOfTheFieldContent(middle_Name, Attribute.MAX_LENGTH, "20");
+		pause(3000);
+		inputTextThenClickTab(middle_Name, "@##$%");
+		pause(3000);
+		verifyErrorMessageUnderTheField(middle_name_alphabetic_error, Attribute.INNER_HTML,
+				"Must be alphabetic characters.");
+		pause(2000);
+
+		clearTextFromTheField(middle_Name);
+		pause(2000);
+		inputTextThenClickTab(middle_Name, "123456");
+		verifyErrorMessageUnderTheField(middle_name_alphabetic_error, Attribute.INNER_HTML,
+				"Must be alphabetic characters.");
+		clearTextFromTheField(middle_Name);
+		clickElement(middle_Name);
+		inputTextThenClickTab(middle_Name, "Pihu");
+		pause(2000);
+	}
+
+	public void lastNameValidation() {
+		MiddleNameValidation();
+		pause(3000);
+		clickElement(last_Name);
+		verifyLengthOfTheFieldContent(last_Name, Attribute.MAX_LENGTH, "25");
+		pause(3000);
+		inputTextThenClickTab(last_Name, "*&^%%$$$#");
+		pause(3000);
+		verifyErrorMessageUnderTheField(last_name_alphabetic_error, Attribute.INNER_HTML,
+				"Must be alphabetic characters.");
+		pause(2000);
+		inputTextThenClickTab(last_Name, "1233445");
+		verifyErrorMessageUnderTheField(last_name_alphabetic_error, Attribute.INNER_HTML,
+				"Must be alphabetic characters.");
+		clearTextFromTheField(last_Name);
+		pause(3000);
+		verifyErrorMessageUnderTheField(last_name_is_a_requird_field, Attribute.INNER_HTML,
+				"Last Name is a required field.");
+		clickElement(last_Name);
+		inputTextThenClickTab(last_Name, "kaha");
+		pause(2000);
+	}
+
+	public void iAmDropdownBtnValidation() {
+		pause(3000);
+		 lastNameValidation();
+		driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+	    clickElementThenTab(iAmFromDropdown);
+	    pause(2000);
+		verifyErrorMessageUnderTheField(iAmIsARequierdField, Attribute.INNER_HTML, "I'm is a required field.");
+		// clickElement(iAmFromDropdown);
+		selectDropdown(iAmFromDropdown, "a Student");
+		pause(3000);
+		
+		
+	}
+
+	public void courseWishToEnrollValidation() {
+		pause(3000);
+		driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		clickElementThenTab(courseWishToEnrollFromDropdown);
+		verifyErrorMessageUnderTheField(courseWishToEnrollIsArequaredField, Attribute.INNER_HTML,
+				"Course Wish to Enroll is a required field. ");
+		selectDropdown(courseWishToEnrollFromDropdown, "Python");
+		pause(5000);
+	}
+	public void phoneNumberValidation() {
+		driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		pause(3000);
+		clickElement(phoneNumber);
+		verifyLengthOfTheFieldContent(phoneNumber, Attribute.MAX_LENGTH, "10");
+		pause(3000);
+		inputTextThenClickTab(phoneNumber, "@#$%^&*+*-");
+		verifyErrorMessageUnderTheField(mustBeAValidPhoneNumber, Attribute.INNER_HTML, "Must be a valid Phone Number.");
+		pause(3000);
+		inputTextThenClickTab(phoneNumber, "1032");
+		verifyErrorMessageUnderTheField(phNMustBeExactly10Digit, Attribute.INNER_HTML, "Must be a valid Phone Number.");
+		pause(3000);
+		inputTextThenClickTab(phoneNumber, "0192765446");
+		verifyErrorMessageUnderTheField(phNMustNotStartWithA1Or0, Attribute.INNER_HTML, "Must be a valid Phone Number.");
+		pause(3000);
+		inputTextThenClickTab(phoneNumber, "AabBDEabab");
+		verifyErrorMessageUnderTheField(phnNotAllowUperOrLowerCaseLetter, Attribute.INNER_HTML, "Must be a valid Phone Number.");
+		pause(3000);
+		clearTextFromTheField(phoneNumber);
+		pause(3000);
+		verifyErrorMessageUnderTheField(phoneNumberIsARequerdField, Attribute.INNER_HTML, "Phone Number is a required field.");
+		inputTextThenClickTab(phoneNumber, "9297276956");
+		pause(6000);
+		
 	}
 
 }
