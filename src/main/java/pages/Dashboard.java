@@ -1,5 +1,6 @@
 package pages;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.List;
 
@@ -205,7 +206,7 @@ public class Dashboard {
 	WebElement courseWishToEnrollFromDropdown;
 	@FindBy(xpath = "//small[@id='course_wish_error']")
 	WebElement courseWishToEnrollIsArequaredField;
-	
+
 	@FindBy(xpath = "//input[@id='id_phone']")
 	WebElement phoneNumber;
 	@FindBy(xpath = "//small[text()='Phone Number is a required field.']")
@@ -218,6 +219,46 @@ public class Dashboard {
 	WebElement phNMustNotStartWithA1Or0;
 	@FindBy(xpath = "//small[@id='phone_error']")
 	WebElement phnNotAllowUperOrLowerCaseLetter;
+
+	@FindBy(xpath = "//input[@id='id_email']")
+	WebElement email;
+	@FindBy(xpath = "//span[@id='email_error']")
+	WebElement email_address_is_a_required_field;
+	@FindBy(xpath = "//span[@id='email_error']")
+	WebElement must_be_a_valid_email_address;
+	@FindBy(xpath = "//span[@id='email_error']")
+	WebElement mustBeValidEmail;
+
+	@FindBy(xpath = "//input[@id='id_password']")
+	WebElement password;
+	@FindBy(xpath = "//span[@id='password_error']")
+	WebElement passwordIsARequiredField;
+	@FindBy(xpath = "//span[@id='password_error']")
+	WebElement please_refer_to_password_requirements;
+	@FindBy(xpath = "//i[@id='password-icon']")
+	WebElement hiden_password;
+	@FindBy(xpath = "//span[@ id='password_error']")
+	WebElement must_contain_a_minimum_of_8_characters;
+
+	@FindBy(xpath = "//select[@id='id_gender']")
+	WebElement gender;
+
+	@FindBy(xpath = "//input[@id='id_image']")
+	WebElement personal_image;
+	@FindBy(xpath = "//span[@id='image_error']")
+	WebElement personal_image_is_a_required_field;
+	@FindBy(xpath = "//input[@id='id_image']")
+	WebElement no_file_chosen;
+
+	@FindBy(xpath = "//input[@id='id_photo_id']")
+	WebElement photoId;
+	@FindBy(xpath = "//input[@name='photo_id']")
+	WebElement photo_Id_is_a_required_field;
+
+	@FindBy(xpath = "//select[@id='id_birth_year']")
+	WebElement birthYear;
+	@FindBy(xpath = "span[@id='birthYearError']")
+	WebElement birth_year_is_a_required_field;
 
 	public void login_easy_step() {
 		pause(2000);
@@ -496,16 +537,15 @@ public class Dashboard {
 
 	public void iAmDropdownBtnValidation() {
 		pause(3000);
-		 lastNameValidation();
+		lastNameValidation();
 		driver.get("https://enthrallit.com/course/dashboard/enrolls/");
-	    clickElementThenTab(iAmFromDropdown);
-	    pause(2000);
+		clickElementThenTab(iAmFromDropdown);
+		pause(2000);
 		verifyErrorMessageUnderTheField(iAmIsARequierdField, Attribute.INNER_HTML, "I'm is a required field.");
 		// clickElement(iAmFromDropdown);
 		selectDropdown(iAmFromDropdown, "a Student");
 		pause(3000);
-		
-		
+
 	}
 
 	public void courseWishToEnrollValidation() {
@@ -517,6 +557,7 @@ public class Dashboard {
 		selectDropdown(courseWishToEnrollFromDropdown, "Python");
 		pause(5000);
 	}
+
 	public void phoneNumberValidation() {
 		driver.get("https://enthrallit.com/course/dashboard/enrolls/");
 		pause(3000);
@@ -530,17 +571,106 @@ public class Dashboard {
 		verifyErrorMessageUnderTheField(phNMustBeExactly10Digit, Attribute.INNER_HTML, "Must be a valid Phone Number.");
 		pause(3000);
 		inputTextThenClickTab(phoneNumber, "0192765446");
-		verifyErrorMessageUnderTheField(phNMustNotStartWithA1Or0, Attribute.INNER_HTML, "Must be a valid Phone Number.");
+		verifyErrorMessageUnderTheField(phNMustNotStartWithA1Or0, Attribute.INNER_HTML,
+				"Must be a valid Phone Number.");
 		pause(3000);
 		inputTextThenClickTab(phoneNumber, "AabBDEabab");
-		verifyErrorMessageUnderTheField(phnNotAllowUperOrLowerCaseLetter, Attribute.INNER_HTML, "Must be a valid Phone Number.");
+		verifyErrorMessageUnderTheField(phnNotAllowUperOrLowerCaseLetter, Attribute.INNER_HTML,
+				"Must be a valid Phone Number.");
 		pause(3000);
 		clearTextFromTheField(phoneNumber);
 		pause(3000);
-		verifyErrorMessageUnderTheField(phoneNumberIsARequerdField, Attribute.INNER_HTML, "Phone Number is a required field.");
+		verifyErrorMessageUnderTheField(phoneNumberIsARequerdField, Attribute.INNER_HTML,
+				"Phone Number is a required field.");
 		inputTextThenClickTab(phoneNumber, "9297276956");
 		pause(6000);
-		
+
+	}
+
+	public void emailAddressValidation() {
+		driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		pause(3000);
+		clickElement(email);
+		verifyLengthOfTheFieldContent(email, Attribute.MAX_LENGTH, "74");
+		inputTextThenClickTab(email, "shown");
+		verifyErrorMessageUnderTheField(must_be_a_valid_email_address, Attribute.INNER_HTML,
+				"Must be a valid Email Address.");
+		pause(3000);
+		inputTextThenClickTab(email, "showndorjo@12234A44455$7777###@gmail.com");
+		verifyErrorMessageUnderTheField(mustBeValidEmail, Attribute.INNER_HTML, "Must be a valid Email Address.");
+		clearTextFromTheField(email);
+		verifyErrorMessageUnderTheField(email_address_is_a_required_field, Attribute.INNER_HTML,
+				"Email Address is a required field.");
+		inputTextThenClickTab(email, "roopkotha05@gmail.com");
+		pause(4000);
+	}
+
+	public void passwordValidation() {
+		driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		pause(3000);
+		clickElement(password);
+		verifyLengthOfTheFieldContent(password, Attribute.MAX_LENGTH, "74");
+		inputTextThenClickTab(password, "?<>()&\"'?|/\\");
+		pause(6000);
+		verifyErrorMessageUnderTheField(please_refer_to_password_requirements, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		pause(6000);
+		inputTextThenClickTab(password, "Ti3-top");
+
+		verifyErrorMessageUnderTheField(must_contain_a_minimum_of_8_characters, Attribute.INNER_HTML,
+				"Please refer to Password requirements.");
+		clearTextFromTheField(password);
+		verifyErrorMessageUnderTheField(passwordIsARequiredField, Attribute.INNER_HTML,
+				"Password is a required field.");
+		inputTextThenClickTab(password, "Ab!1tip2");
+		pause(6000);
+	}
+
+	public void genderValidation() {
+		driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		pause(3000);
+		clickElementThenTab(gender);
+		selectDropdown(gender, "Female");
+		pause(3000);
+
+	}
+
+	public void personalImageValidation() {
+		driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		pause(3000);
+		// clickElementThenTab(personal_image);
+
+		// verifyErrorMessageUnderTheField(no_file_chosen, Attribute.INNER_HTML,
+		// "Personal Image is a required field.");
+		// pause(3000);
+		// verifyErrorMessageUnderTheField(personal_image_is_a_required_field,
+		// Attribute.INNER_HTML,
+		// "Personal Image is a required field.");
+		// uploadPhotoImage(personal_image,
+		// "C:\\Users\\shown\\eclipse-workspace\\com.enthrallIt.sapna\\image\\personalID.jpg");
+		File file = new File(".\\image\\personalID.jpg");
+		personal_image.sendKeys(file.getAbsolutePath());
+		pause(3000);
+	}
+
+	public void photoIdImageValidation() {
+		driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		pause(3000);
+		File file = new File(".\\image\\PhotoID.jpg");
+		personal_image.sendKeys(file.getAbsolutePath());
+		pause(3000);
+
+	}
+
+	public void birthYearValidation() {
+		pause(3000);
+		driver.get("https://enthrallit.com/course/dashboard/enrolls/");
+		clickElementThenTab(birthYear);
+
+		verifyErrorMessageUnderTheField(birth_year_is_a_required_field, Attribute.INNER_HTML,
+				"Birth Year is a required field.");
+		selectDropdown(birthYear, "1986");
+		pause(5000);
 	}
 
 }

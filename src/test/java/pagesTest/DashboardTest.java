@@ -54,5 +54,15 @@ public void dashboard_page_validetion_test() {
 		dashboard.iAmDropdownBtnValidation();
 		dashboard.courseWishToEnrollValidation();
 		dashboard.phoneNumberValidation();
+		dashboard.emailAddressValidation();
+		dashboard.passwordValidation();
+		dashboard.genderValidation();
+		dashboard.personalImageValidation();
+		dashboard.photoIdImageValidation();
+		dashboard.birthYearValidation();
+	}
+	@Test
+	public void imageValidation() {
+		dashboard.personalImageValidation();
 	}
 }
