@@ -27,4 +27,42 @@ public void dashboard_page_validetion_test() {
 		//dashboard.Automation_page_validation_step();
 		dashboard.EnrollNowHomePageStepValidation();
 	}
+	@Test
+	public void firstNameValidationTest() {
+		dashboard.firstNameValidation();
+		dashboard.MiddleNameValidation() ;
+	}
+	@Test
+	public void MiddleNameValidation() {
+		dashboard.MiddleNameValidation();
+	}
+	@Test
+	public void LastNameValidationTest() {
+		dashboard.lastNameValidation();
+	}
+	@Test
+	public void iAmDropdownBtnValidationTest() {
+		dashboard.iAmDropdownBtnValidation();
+	}
+	@Test
+	public void courseWishToEnrollValidationTest() {
+		dashboard.courseWishToEnrollValidation();
+		
+	}
+	@Test
+	public void phoneNumberValidationTest() {
+		dashboard.iAmDropdownBtnValidation();
+		dashboard.courseWishToEnrollValidation();
+		dashboard.phoneNumberValidation();
+		dashboard.emailAddressValidation();
+		dashboard.passwordValidation();
+		dashboard.genderValidation();
+		dashboard.personalImageValidation();
+		dashboard.photoIdImageValidation();
+		dashboard.birthYearValidation();
+	}
+	@Test
+	public void imageValidation() {
+		dashboard.personalImageValidation();
+	}
 }

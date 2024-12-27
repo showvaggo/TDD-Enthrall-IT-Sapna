@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
@@ -44,7 +45,16 @@ public class CommonActions {
 		}
 
 	}
-
+	public static void clickElementThenTab(WebElement element) {
+		try {
+			element.sendKeys(Keys.TAB);
+			Loggers.logTheTest(element + "<---------> has been clicked, then click Tab Key");
+		} catch (NoSuchElementException | NullPointerException e) {
+			e.printStackTrace();
+			Loggers.logTheTest(element + "<----------> has not been found\n" + e.getMessage());
+			Assert.fail();
+		}
+	}
 	// common method for sleep()
 	public static void pause(long millis) {
 		try {
@@ -83,6 +93,8 @@ public class CommonActions {
 			Loggers.logTheTest(element + "<----------> is not Displayed\n" + e.getMessage());
 		}
 	}
+	
+
 
 	public static void elementSelected(WebElement element) {
 		try {
@@ -376,5 +388,128 @@ public class CommonActions {
 			Assert.fail();
 		}
 	}
-
+	// This is build ONLY for Enthrall IT Actions class inside
+			public static void switchToChildWindow(WebDriver driver, WebElement element) {
+				try {
+					clickElement(element);
+					Set<String> allWindowHandles = driver.getWindowHandles();
+					Loggers.logTheTest("Total Windows Opened: " + allWindowHandles.size());
+					// Extract Parent and child window from all window handles
+					String parent = (String) allWindowHandles.toArray()[0];
+					String child = (String) allWindowHandles.toArray()[1];
+					driver.switchTo().window(child);
+					Loggers.logTheTest(" The Window moved to --> " + child);
+				} catch (NoSuchElementException | NullPointerException e) {
+					e.printStackTrace();
+					Loggers.logTheTest(element + "<----------> has not been found\n" + e.getMessage());
+					Assert.fail();
+				}
+			}
+			
+			// This is build ONLY for Enthrall IT Actions class inside
+			public static void mouseHoverAction (WebDriver driver,  WebElement hoverActionElement, WebElement elementNeedTobeClickFinally) {
+				try {
+					Actions actions = new Actions(driver);
+					actions.moveToElement(hoverActionElement).build().perform();
+					pause(3000);
+					clickElement(elementNeedTobeClickFinally);
+					Loggers.logTheTest(elementNeedTobeClickFinally + " has been selected from the mouse hover action ---> ");
+				} catch (NoSuchElementException | NullPointerException e) {
+					e.printStackTrace();
+					Loggers.logTheTest(hoverActionElement + "<----------> has not been found\n" + e.getMessage());
+					Assert.fail();
+				}
+			}
+			
+			
+			public static void rightClickActionAccept (WebDriver driver,  WebElement rightClickActionElement, WebElement elementNeedTobeClickFinally) {
+				try {
+					Actions actions = new Actions(driver);
+					actions.moveToElement(rightClickActionElement).contextClick().build().perform();
+					Loggers.logTheTest(rightClickActionElement + " has been performing the right click action ---> ");
+					pause(3000);
+					clickElement(elementNeedTobeClickFinally);
+					Loggers.logTheTest(elementNeedTobeClickFinally + " has been selected from the right click action ---> ");
+					pause(3000);
+					Alert alert = driver.switchTo().alert();
+					System.out.println("\nAlert Text: " + alert.getText());
+					alert.accept();
+					pause(3000);			
+					Loggers.logTheTest(elementNeedTobeClickFinally + " has been accepted from the Alert finally ---> ");
+				} catch (NoSuchElementException | NullPointerException e) {
+					e.printStackTrace();
+					Loggers.logTheTest(rightClickActionElement + "<----------> has not been found\n" + e.getMessage());
+					Assert.fail();
+				}
+			}
+			
+			public static void rightClickActionDismiss (WebDriver driver,  WebElement rightClickActionElement, WebElement elementNeedTobeClickFinally) {
+				try {
+					Actions actions = new Actions(driver);
+					actions.moveToElement(rightClickActionElement).contextClick().build().perform();
+					Loggers.logTheTest(rightClickActionElement + " has been performing the right click action ---> ");
+					pause(3000);
+					clickElement(elementNeedTobeClickFinally);
+					Loggers.logTheTest(elementNeedTobeClickFinally + " has been selected from the right click action ---> ");
+					pause(3000);
+					Alert alert = driver.switchTo().alert();
+					System.out.println("\nAlert Text: " + alert.getText());
+					alert.dismiss();
+					pause(3000);			
+					Loggers.logTheTest(elementNeedTobeClickFinally + " has been accepted from the Alert finally ---> ");
+				} catch (NoSuchElementException | NullPointerException e) {
+					e.printStackTrace();
+					Loggers.logTheTest(rightClickActionElement + "<----------> has not been found\n" + e.getMessage());
+					Assert.fail();
+				}
+			}
+			
+			public static void doubleClickActionAccept (WebDriver driver,  WebElement doubleClickActionElement) {
+				try {
+					Actions actions = new Actions(driver);
+					actions.doubleClick(doubleClickActionElement).build().perform();
+					Loggers.logTheTest(doubleClickActionElement + " has been performing the double click action ---> ");
+					pause(3000);
+					Alert alert = driver.switchTo().alert();
+					System.out.println("\nAlert Text: " + alert.getText());
+					alert.accept();
+					pause(3000);			
+					Loggers.logTheTest(doubleClickActionElement + " has been accepted from the Alert finally ---> ");
+				} catch (NoSuchElementException | NullPointerException e) {
+					e.printStackTrace();
+					Loggers.logTheTest(doubleClickActionElement + "<----------> has not been found\n" + e.getMessage());
+					Assert.fail();
+				}
+			}
+			
+			public static void doubleClickActionDismiss (WebDriver driver,  WebElement doubleClickActionElement) {
+				try {
+					Actions actions = new Actions(driver);
+					actions.doubleClick(doubleClickActionElement).build().perform();
+					Loggers.logTheTest(doubleClickActionElement + " has been performing the double click action ---> ");
+					pause(3000);
+					Alert alert = driver.switchTo().alert();
+					System.out.println("\nAlert Text: " + alert.getText());
+					alert.dismiss();
+					pause(3000);			
+					Loggers.logTheTest(doubleClickActionElement + " has been dismissed from the Alert finally ---> ");
+				} catch (NoSuchElementException | NullPointerException e) {
+					e.printStackTrace();
+					Loggers.logTheTest(doubleClickActionElement + "<----------> has not been found\n" + e.getMessage());
+					Assert.fail();
+				}
+			}
+			
+			public static void findYourNameFromTheTable (WebElement elementOfYourname, String expected) {		
+				// You have to create the web element like below
+				// try with @FindBy, if it does not work, then use By class to create element
+				// WebElement name = driver.findElement(By.cssSelector("table.navFooterMoreOnAmazon tr:nth-child(1) td:nth-child(7)"));
+				try {
+					String actual = elementOfYourname.getText();
+					Loggers.logTheTest(elementOfYourname + " ---> Actual text : " + actual + ". Expected text : " + expected);
+					Assert.assertEquals(actual, expected, "Name in the Table doesn't match");
+				} catch (NoSuchElementException | NullPointerException e) {
+					Loggers.logTheTest(elementOfYourname + "<----------> is not Displayed\n" + e.getMessage() );
+				}
+			}
 }
