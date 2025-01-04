@@ -12,9 +12,7 @@ import static common.CommonWaits.*;
 import java.time.Duration;
 
 public class HomePage {
-	/*
-	 * Create Constructor Create Web Element Create method to test
-	 */
+
 	WebDriver driver;
 	WebDriverWait wait;
 
@@ -28,136 +26,134 @@ public class HomePage {
 	WebElement logo;
 
 	@FindBy(xpath = "//li[@id='home' and @name='home']")
-	WebElement homeHeaderElement;
+	WebElement home_header;
 
 	@FindBy(xpath = "//a[@id='home' and @name='home']")
-	WebElement homeFooterElement;
+	WebElement home_footer;
 
 	@FindBy(xpath = "//li[@id='courses']")
-	WebElement courseHeaderElement;
+	WebElement course_header;
 
 	@FindBy(xpath = "//li[@id='courses' and @name='courses']")
-	WebElement courseFooterElement;
+	WebElement course_footer;
 
 	@FindBy(xpath = "//li[@id='mentors']")
-	WebElement mentorHeaderElement;
+	WebElement mentor_header;
 
 	@FindBy(xpath = "//li[@id='mentors']")
-	WebElement mentorFooterElement;
+	WebElement mentor_footer;
 
 	@FindBy(xpath = "//li[@id='alumni' and @name='alumni']")
-	WebElement alumniHeaderElement;
+	WebElement alumni_header;
 
 	@FindBy(xpath = "//li[@id='alumni' and @name='alumni']")
-	WebElement alumniFooterElement;
+	WebElement alumni_footer;
 
 	@FindBy(xpath = "//li[@id='about us']")
-	WebElement aboutUsHeaderElement;
+	WebElement about_us_header;
 
 	@FindBy(xpath = "//li[@id='about us']")
-	WebElement aboutUsFooterElement;
+	WebElement about_us_footer;
 
 	@FindBy(xpath = "//a[@class='nav-link' and @id='login-link']")
-	WebElement loginButtonHeaderElement;
+	WebElement login_button_header_menu;
 
 	@FindBy(xpath = "//a[text()='Login' and @id='login-link' and @ name='login-link' and @ class='nav-link']")
-	WebElement loginButtonFooterElement;
+	WebElement login_button_footer_menu;
 
 	@FindBy(xpath = "//a[@id='enroll_now']")
-	WebElement enrollNowFooterElement;
+	WebElement enroll_now_footer;
 
 	@FindBy(xpath = "//p[text()='info@enthrallit.com']")
-	WebElement emailAddress;
+	WebElement email_address;
 
 	@FindBy(xpath = "//p[@class='phone-number']")
-	WebElement phoneNumberElement;
+	WebElement phone_number;
 
 	@FindBy(xpath = "//h2[text()='Contact Us']")
-	WebElement contuctUsElement;
+	WebElement contuct_us_element;
 
 	@FindBy(xpath = "//h2[text()='Do You Have Any Questions']")
-	WebElement doYouHaveAnyQuestionHeaderElement;
+	WebElement do_you_have_any_question_header;
 
 	@FindBy(xpath = "//input[@id='id_name']")
-	WebElement nameFromDoYouHaveAnyQuestionHeaderElement;
+	WebElement name_from_do_you_have_any_question_header;
 
 	@FindBy(xpath = "//input[@id='id_email']")
-	WebElement emailFromDoYouHaveAnyQuestionHeaderElement;
+	WebElement email_from_do_you_have_any_question_header;
 
 	@FindBy(xpath = "//input[@id='id_subject']")
-	WebElement subjectFromDoYouHaveAnyQuationHeaderElement;
+	WebElement subject_from_do_you_have_any_quation_header;
 
 	@FindBy(xpath = "//input[@id='id_experiance']")
-	WebElement experianceFromDoYouHaveAnyQuestionHeaderElement;
+	WebElement experiance_from_do_you_have_any_question_header;
 
 	@FindBy(xpath = "//textarea[@id='id_message']")
-	WebElement massageFromDoYouHaveAnyQuestionHeaderElement;
+	WebElement massage_from_do_you_have_any_question_header;
 
 	@FindBy(xpath = "//button[text()='send now']")
-	WebElement sendNowFromDoYouHaveAnyQuestionHeaderElement;
+	WebElement send_now_from_do_you_have_any_question_header;
 
 	@FindBy(xpath = "//h3[@id='find-us']")
-	WebElement findUsFromHomePagElement;
+	WebElement find_us_from_homePag;
 
-	/*
-	 * 1) is the logo displayed? 2) What is the title? 3) Header validation for
-	 * rest: All the button like Home, courses, Mentors, Alumni, About Us, Login
-	 * enroll Now button, phone number, Id. You have to find out the web element and
-	 * click them to see if they are redirecting to the page. 4) When they redirect,
-	 * please validate title, current url and header if present. 5) Validate Footer
-	 * for Home, courses, Mentors, Alumni, About Us, Login, enroll Now button 6)
-	 * Scroll down and go to Contact Us. Create method for
-	 * "fill out the form and submit, validate the success or error message" and
-	 * test
-	 */
-	public void logoValidation() {
+	public void logo_validation() {
 		pause(4000);
 		elementDisplayed(logo);
 		clickElement(logo);
 		pause(4000);
 	}
 
-	public void titleValidation() {
+	public void title_validation() {
 		pause(3000);
 		verifyTitle(driver, "Enthrall IT");
 		pause(4000);
 	}
 
-	public void validationForAllHeaderMenu() {
+	public void login_button_from_menu_bar_validation() {
+
+		elementEnabled(login_button_header_menu);
+		clickElement(login_button_header_menu);
+		verifyTitle(driver, "Enthrall IT");
+		verifyCurrentUrl(driver, "https://enthrallit.com/accounts/login/");
+
+	}
+
+	public void validation_for_all_header_menu() {
 
 		pause(4000);
-		elementEnabled(homeHeaderElement);
-		clickElement(homeHeaderElement);
+		elementEnabled(home_header);
+		clickElement(home_header);
 		verifyTitle(driver, "Enthrall IT");
 		verifyCurrentUrl(driver, "https://enthrallit.com/");
 
 		pause(4000);
-		elementEnabled(courseHeaderElement);
-		clickElement(courseHeaderElement);
+		elementEnabled(course_header);
+		clickElement(course_header);
 		verifyTitle(driver, "Enthrall IT");
 		verifyCurrentUrl(driver, "https://enthrallit.com/courses/");
 
 		pause(3000);
-		elementEnabled(mentorHeaderElement);
-		clickElement(mentorHeaderElement);
+		elementEnabled(mentor_header);
+		clickElement(mentor_header);
 		verifyTitle(driver, "Enthrall IT");
 		verifyCurrentUrl(driver, "https://enthrallit.com/mentors/");
 
 		pause(3000);
-		elementEnabled(alumniHeaderElement);
-		clickElement(alumniHeaderElement);
+		elementEnabled(alumni_header);
+		clickElement(alumni_header);
 		verifyTitle(driver, "Enthrall IT");
 		verifyCurrentUrl(driver, "https://enthrallit.com/alumni/");
 
 		pause(3000);
-		elementEnabled(aboutUsHeaderElement);
-		clickElement(aboutUsHeaderElement);
-		verifyTitle(driver, "Enthrall IT");
+		elementEnabled(about_us_header);
+		clickElement(about_us_header);
+		verifyTitle(driver, "About us");
 		verifyCurrentUrl(driver, "https://enthrallit.com/about/");
 
 		pause(3000);
-		elementEnabled(loginButtonHeaderElement);
-		clickElement(loginButtonHeaderElement);
+		elementEnabled(login_button_header_menu);
+		clickElement(login_button_header_menu);
 		verifyTitle(driver, "Enthrall IT");
 		verifyCurrentUrl(driver, "https://enthrallit.com/accounts/login/");
 
@@ -165,96 +161,97 @@ public class HomePage {
 
 	public void scroll_into_redirect_page_and_validate_title_current_url_and_header() {
 		pause(3000);
-		scrollIntoViewTheElementUsingJavascriptExecutor(driver, contuctUsElement);
+		scrollIntoViewTheElementUsingJavascriptExecutor(driver, contuct_us_element);
 
 		pause(4000);
-		validationOfHeader(doYouHaveAnyQuestionHeaderElement, "Do You Have Any Questions");
+		validationOfHeader(do_you_have_any_question_header, "Do You Have Any Questions");
 
 		pause(4000);
-		elementEnabled(nameFromDoYouHaveAnyQuestionHeaderElement);
-		clickElement(nameFromDoYouHaveAnyQuestionHeaderElement);
-		inputTextThenClickTab(nameFromDoYouHaveAnyQuestionHeaderElement, "Purnota");
+		elementEnabled(name_from_do_you_have_any_question_header);
+		clickElement(name_from_do_you_have_any_question_header);
+		inputTextThenClickTab(name_from_do_you_have_any_question_header, "Purnota");
 
 		pause(4000);
-		elementEnabled(emailFromDoYouHaveAnyQuestionHeaderElement);
-		clickElement(emailFromDoYouHaveAnyQuestionHeaderElement);
-		inputTextThenClickTab(emailFromDoYouHaveAnyQuestionHeaderElement, "toroni1980@gmail.com");
+		elementEnabled(email_from_do_you_have_any_question_header);
+		clickElement(email_from_do_you_have_any_question_header);
+		inputTextThenClickTab(email_from_do_you_have_any_question_header, "toroni1980@gmail.com");
 
 		pause(3000);
-		elementEnabled(subjectFromDoYouHaveAnyQuationHeaderElement);
-		clickElement(subjectFromDoYouHaveAnyQuationHeaderElement);
-		inputTextThenClickTab(subjectFromDoYouHaveAnyQuationHeaderElement, "QA(Atomation)");
+		elementEnabled(subject_from_do_you_have_any_quation_header);
+		clickElement(subject_from_do_you_have_any_quation_header);
+		inputTextThenClickTab(send_now_from_do_you_have_any_question_header, "QA(Atomation)");
 
 		pause(3000);
-		elementDisplayed(experianceFromDoYouHaveAnyQuestionHeaderElement);
-		clickElement(experianceFromDoYouHaveAnyQuestionHeaderElement);
-		inputTextThenClickTab(experianceFromDoYouHaveAnyQuestionHeaderElement, "5 years job(IT base)");
+		elementDisplayed(experiance_from_do_you_have_any_question_header);
+		clickElement(experiance_from_do_you_have_any_question_header);
+		inputTextThenClickTab(experiance_from_do_you_have_any_question_header, "5 years job(IT base)");
 
 		pause(3000);
-		elementEnabled(massageFromDoYouHaveAnyQuestionHeaderElement);
-		clickElement(massageFromDoYouHaveAnyQuestionHeaderElement);
-		inputTextThenClickTab(massageFromDoYouHaveAnyQuestionHeaderElement,
+		elementEnabled(massage_from_do_you_have_any_question_header);
+		clickElement(massage_from_do_you_have_any_question_header);
+		inputTextThenClickTab(massage_from_do_you_have_any_question_header,
 				"I need more Information about Enthrall IT school QA Atomation program.");
 
 		pause(4000);
-		elementEnabled(sendNowFromDoYouHaveAnyQuestionHeaderElement);
-		clickElement(sendNowFromDoYouHaveAnyQuestionHeaderElement);
-		inputTextThenClickEnter(sendNowFromDoYouHaveAnyQuestionHeaderElement, "click");
+		elementEnabled(send_now_from_do_you_have_any_question_header);
+		clickElement(send_now_from_do_you_have_any_question_header);
+		inputTextThenClickEnter(send_now_from_do_you_have_any_question_header, "click");
 
 		pause(4000);
 
 	}
 
-	public void validationForAllFooterMenu() {
+	public void validation_for_all_footer_menu() {
 		pause(3000);
-		elementEnabled(homeFooterElement);
-		clickElement(homeFooterElement);
+		elementEnabled(home_footer);
+		clickElement(home_footer);
 		verifyTitle(driver, "Enthrall IT");
 		verifyCurrentUrl(driver, "https://enthrallit.com/");
 
 		pause(3000);
-		elementEnabled(courseFooterElement);
-		clickElement(courseFooterElement);
+		elementEnabled(course_footer);
+		clickElement(course_footer);
 		verifyTitle(driver, "Enthrall IT");
 		verifyCurrentUrl(driver, "https://enthrallit.com/courses/");
 
 		pause(3000);
-		elementEnabled(mentorFooterElement);
-		clickElement(mentorFooterElement);
+		elementEnabled(mentor_footer);
+		clickElement(mentor_footer);
 		verifyTitle(driver, "Enthrall IT");
 		verifyCurrentUrl(driver, "https://enthrallit.com/mentors/");
 
 		pause(3000);
-		elementEnabled(alumniFooterElement);
-		clickElement(alumniFooterElement);
+		elementEnabled(alumni_footer);
+		clickElement(alumni_footer);
 		verifyTitle(driver, "Enthrall IT");
 		verifyCurrentUrl(driver, "https://enthrallit.com/alumni/");
 
 		pause(3000);
-		elementEnabled(aboutUsFooterElement);
-		clickElement(aboutUsFooterElement);
-		verifyTitle(driver, "Enthrall IT");
+		elementEnabled(about_us_footer);
+		clickElement(about_us_footer);
+		verifyTitle(driver, "About us");
 		verifyCurrentUrl(driver, "https://enthrallit.com/about/");
 
 		pause(3000);
-		elementEnabled(loginButtonFooterElement);
-		clickElement(loginButtonFooterElement);
+		elementEnabled(login_button_footer_menu);
+		clickElement(login_button_footer_menu);
 		verifyTitle(driver, "Enthrall IT");
 		verifyCurrentUrl(driver, "https://enthrallit.com/accounts/login/");
 
 		pause(3000);
-		elementEnabled(enrollNowFooterElement);
-		clickElement(enrollNowFooterElement);
+		elementEnabled(enroll_now_footer);
+		clickElement(enroll_now_footer);
 		verifyTitle(driver, "Enthrall IT");
-		verifyCurrentUrl(driver, "https://enthrallit.com/course/dashboard/enroll/");
+		verifyCurrentUrl(driver, "https://enthrallit.com/course/apply/");
 
 	}
 
-	public void phoneAndEmailValidation() {
+	public void phone_and_email_validation() {
+		
 		pause(4000);
-		verifyTextOfTheWebElement(emailAddress, "info@enthrallit.com");
+		verifyTextOfTheWebElement(email_address, "info@enthrallit.com");
 		pause(3000);
-		verifyTextOfTheWebElement(phoneNumberElement, "+1 929-301-6028");
+		verifyTextOfTheWebElement(phone_number, "+1 929-301-6028");
 		pause(3000);
 	}
 

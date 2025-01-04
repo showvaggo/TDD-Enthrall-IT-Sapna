@@ -60,7 +60,7 @@ public class BaseClass {
 
 	@Parameters("browser")
 	@BeforeMethod
-	public void setUp(@Optional(EDGE)String browserName) {
+	public void setUp(@Optional(CHROME)String browserName) {
 		
 		initDriver(browserName);
 		driver.manage().window().maximize();
