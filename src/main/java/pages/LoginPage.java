@@ -11,9 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage {
 
-	/*
-	 * Create Constructor Create Web Element Create method to test
-	 */
 	WebDriver driver;
 	WebDriverWait wait;
 
@@ -41,12 +38,6 @@ public class LoginPage {
 	@FindBy(xpath = "//button[@id='login' and @name='login']")
 	WebElement userlogin;
 
-	/*
-	 * 1) Click Login from header 2) The page will direct to Login Page, validate
-	 * title, current url, header etc. 3) provide your email and password and click
-	 * submit button 4) When click a button make sure, the button is enabled, verify
-	 * text and them click, verify logo, current url, title, header
-	 */
 	public void click_login_button() {
 		pause(3000);
 		clickElement(loginHeaderElement);
@@ -74,7 +65,7 @@ public class LoginPage {
 		pause(4000);
 		clickElement(loginHeaderElement);
 		pause(3000);
-		// verifyTextOfTheWebElement(loginPageText, "Login into your account");
+
 	}
 
 	public void login_page_text_validation() {
